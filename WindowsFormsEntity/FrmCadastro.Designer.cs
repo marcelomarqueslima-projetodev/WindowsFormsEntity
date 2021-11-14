@@ -167,6 +167,7 @@
             this.Controls.Add(this.btnSalvar);
             this.Name = "FrmCadastro";
             this.Text = "EF - Insert, Update and Delete";
+            this.Load += new System.EventHandler(this.FrmCadastro_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

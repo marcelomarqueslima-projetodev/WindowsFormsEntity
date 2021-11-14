@@ -25,6 +25,10 @@ namespace WindowsFormsEntity
             txtEndereco.Text = string.Empty;
             txtNome.Text = string.Empty;
             txtSobrenome.Text = string.Empty;
+
+            btnSalvar.Text = "Salvar";
+            btnDeletar.Enabled = false;
+            model.CustomerID = 0;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -40,6 +44,11 @@ namespace WindowsFormsEntity
         private void btnSalvar_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void FrmCadastro_Load(object sender, EventArgs e)
+        {
+            Limpa();
         }
     }
 }
