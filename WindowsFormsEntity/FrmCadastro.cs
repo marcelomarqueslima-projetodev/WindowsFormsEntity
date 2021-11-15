@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Infrastructure;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -31,6 +32,15 @@ namespace WindowsFormsEntity
             model.CustomerID = 0;
         }
 
+        void PopularDataGridView()
+        {
+            dgvCustomer.AutoGenerateColumns = false;
+            using (DBEntities db = new DBEntities())
+            {
+                dgvCustomer.DataSource = db.Customer.ToList<Customer>();
+            }
+        }
+
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             Limpa();
@@ -43,12 +53,25 @@ namespace WindowsFormsEntity
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
+            model.Nome = txtNome.Text.Trim();
+            model.Sobrenome = txtSobrenome.Text.Trim();
+            model.Cidade = txtCidade.Text.Trim();
+            model.Endereco = txtEndereco.Text.Trim();
 
+            using (DBEntities db = new DBEntities())
+            {
+                db.Customer.Add(model);
+                db.SaveChanges();
+            }
+
+            Limpa();
+            MessageBox.Show("Gravado com sucesso!");
         }
 
         private void FrmCadastro_Load(object sender, EventArgs e)
         {
             Limpa();
+            PopularDataGridView();
         }
     }
 }

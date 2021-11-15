@@ -31,7 +31,7 @@
             this.btnSalvar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtNome = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvCustomer = new System.Windows.Forms.DataGridView();
             this.txtSobrenome = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtCidade = new System.Windows.Forms.TextBox();
@@ -40,7 +40,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnDeletar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.CustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sobrenome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Endereco = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCustomer)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSalvar
@@ -69,14 +74,21 @@
             this.txtNome.Size = new System.Drawing.Size(234, 20);
             this.txtNome.TabIndex = 2;
             // 
-            // dataGridView1
+            // dgvCustomer
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(391, 15);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(818, 317);
-            this.dataGridView1.TabIndex = 3;
+            this.dgvCustomer.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.dgvCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCustomer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CustomerID,
+            this.Nome,
+            this.Sobrenome,
+            this.Cidade,
+            this.Endereco});
+            this.dgvCustomer.Location = new System.Drawing.Point(391, 15);
+            this.dgvCustomer.Name = "dgvCustomer";
+            this.dgvCustomer.ReadOnly = true;
+            this.dgvCustomer.Size = new System.Drawing.Size(557, 317);
+            this.dgvCustomer.TabIndex = 3;
             // 
             // txtSobrenome
             // 
@@ -147,12 +159,47 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // CustomerID
+            // 
+            this.CustomerID.DataPropertyName = "CustomerID";
+            this.CustomerID.HeaderText = "CustomerID";
+            this.CustomerID.Name = "CustomerID";
+            this.CustomerID.ReadOnly = true;
+            // 
+            // Nome
+            // 
+            this.Nome.DataPropertyName = "Nome";
+            this.Nome.HeaderText = "Nome";
+            this.Nome.Name = "Nome";
+            this.Nome.ReadOnly = true;
+            // 
+            // Sobrenome
+            // 
+            this.Sobrenome.DataPropertyName = "Sobrenome";
+            this.Sobrenome.HeaderText = "Sobrenome";
+            this.Sobrenome.Name = "Sobrenome";
+            this.Sobrenome.ReadOnly = true;
+            // 
+            // Cidade
+            // 
+            this.Cidade.DataPropertyName = "Cidade";
+            this.Cidade.HeaderText = "Cidade";
+            this.Cidade.Name = "Cidade";
+            this.Cidade.ReadOnly = true;
+            // 
+            // Endereco
+            // 
+            this.Endereco.DataPropertyName = "Endereco";
+            this.Endereco.HeaderText = "Endereço";
+            this.Endereco.Name = "Endereco";
+            this.Endereco.ReadOnly = true;
+            // 
             // FrmCadastro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.ClientSize = new System.Drawing.Size(1228, 349);
+            this.ClientSize = new System.Drawing.Size(969, 349);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnDeletar);
             this.Controls.Add(this.txtEndereco);
@@ -161,14 +208,15 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtSobrenome);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvCustomer);
             this.Controls.Add(this.txtNome);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSalvar);
             this.Name = "FrmCadastro";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EF - Insert, Update and Delete";
             this.Load += new System.EventHandler(this.FrmCadastro_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCustomer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -179,7 +227,7 @@
         private System.Windows.Forms.Button btnSalvar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtNome;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvCustomer;
         private System.Windows.Forms.TextBox txtSobrenome;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtCidade;
@@ -188,6 +236,11 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnDeletar;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CustomerID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Sobrenome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cidade;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Endereco;
     }
 }
 
