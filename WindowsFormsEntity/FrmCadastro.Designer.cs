@@ -76,6 +76,7 @@
             // 
             // dgvCustomer
             // 
+            this.dgvCustomer.AllowUserToDeleteRows = false;
             this.dgvCustomer.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dgvCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCustomer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -89,6 +90,7 @@
             this.dgvCustomer.ReadOnly = true;
             this.dgvCustomer.Size = new System.Drawing.Size(557, 317);
             this.dgvCustomer.TabIndex = 3;
+            this.dgvCustomer.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomer_CellDoubleClick);
             // 
             // txtSobrenome
             // 
@@ -165,9 +167,11 @@
             this.CustomerID.HeaderText = "CustomerID";
             this.CustomerID.Name = "CustomerID";
             this.CustomerID.ReadOnly = true;
+            this.CustomerID.Visible = false;
             // 
             // Nome
             // 
+            this.Nome.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Nome.DataPropertyName = "Nome";
             this.Nome.HeaderText = "Nome";
             this.Nome.Name = "Nome";
@@ -175,6 +179,7 @@
             // 
             // Sobrenome
             // 
+            this.Sobrenome.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Sobrenome.DataPropertyName = "Sobrenome";
             this.Sobrenome.HeaderText = "Sobrenome";
             this.Sobrenome.Name = "Sobrenome";
@@ -182,6 +187,7 @@
             // 
             // Cidade
             // 
+            this.Cidade.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Cidade.DataPropertyName = "Cidade";
             this.Cidade.HeaderText = "Cidade";
             this.Cidade.Name = "Cidade";
@@ -189,6 +195,7 @@
             // 
             // Endereco
             // 
+            this.Endereco.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Endereco.DataPropertyName = "Endereco";
             this.Endereco.HeaderText = "Endereço";
             this.Endereco.Name = "Endereco";

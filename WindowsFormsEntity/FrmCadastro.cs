@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Drawing;
 using System.Linq;
@@ -32,23 +33,15 @@ namespace WindowsFormsEntity
             model.CustomerID = 0;
         }
 
-        void PopularDataGridView()
+        private void FrmCadastro_Load(object sender, EventArgs e)
         {
-            dgvCustomer.AutoGenerateColumns = false;
-            using (DBEntities db = new DBEntities())
-            {
-                dgvCustomer.DataSource = db.Customer.ToList<Customer>();
-            }
+            Limpa();
+            PopularDataGridView();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             Limpa();
-        }
-
-        private void btnDeletar_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
@@ -60,18 +53,69 @@ namespace WindowsFormsEntity
 
             using (DBEntities db = new DBEntities())
             {
-                db.Customer.Add(model);
+                if (model.CustomerID == 0)
+                {
+                    db.Customer.Add(model);
+                }
+                else
+                {
+                    db.Entry(model).State = EntityState.Modified;
+                }   
                 db.SaveChanges();
             }
 
             Limpa();
+            PopularDataGridView();
             MessageBox.Show("Gravado com sucesso!");
         }
 
-        private void FrmCadastro_Load(object sender, EventArgs e)
+        void PopularDataGridView()
         {
-            Limpa();
-            PopularDataGridView();
+            dgvCustomer.AutoGenerateColumns = false;
+            using (DBEntities db = new DBEntities())
+            {
+                dgvCustomer.DataSource = db.Customer.ToList<Customer>();
+            }
+        }
+
+        private void dgvCustomer_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvCustomer.CurrentRow.Index != -1)
+            {
+                model.CustomerID = Convert.ToInt32(dgvCustomer.CurrentRow.Cells["CustomerID"].Value);
+                using (DBEntities db = new DBEntities())
+                {
+                    model = db.Customer.Where(x => x.CustomerID == model.CustomerID).FirstOrDefault();
+                    txtCidade.Text = model.Cidade;
+                    txtEndereco.Text = model.Endereco;
+                    txtNome.Text = model.Nome;
+                    txtSobrenome.Text = model.Sobrenome;
+                }
+                btnSalvar.Text = "Atualizar";
+                btnDeletar.Enabled = true;
+            }
+        }
+
+        private void btnDeletar_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Deseja realmente deletar?", "EF CRUD", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                model.CustomerID = Convert.ToInt32(dgvCustomer.CurrentRow.Cells["CustomerID"].Value);
+                using (DBEntities db = new DBEntities())
+                {
+                    model = db.Customer.Where(x => x.CustomerID == model.CustomerID).FirstOrDefault();
+                    var entry = db.Entry(model);
+                    if (entry.State == EntityState.Deleted)
+                    {
+                        db.Customer.Attach(model);
+                    }
+                    db.Customer.Remove(model);
+                    db.SaveChanges();
+                    Limpa();
+                    PopularDataGridView();
+                    MessageBox.Show("Registro Deletado com sucesso!");
+                }
+            }
         }
     }
 }
